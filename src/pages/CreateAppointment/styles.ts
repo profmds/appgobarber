@@ -1,37 +1,71 @@
 import styled from 'styled-components/native';
-import { Platform } from 'react-native';
+import { FlatList } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
+import { Provider } from './index';
+
+interface ProviderContainerProps {
+  selected: boolean;
+}
+
+interface ProviderNameProps {
+  selected: boolean;
+}
 
 export const Container = styled.View`
   flex: 1;
-  align-items: center;
-  justify-content: center;
-  padding: 0 30px ${Platform.OS === 'android' ? 150 : 40}px;
 `;
 
-export const Title = styled.Text`
-  font-size: 24px;
-  color: #f4ede8;
-  font-family: 'RobotoSlab-Medium';
-  margin: 64px 0 24px;
-`;
+export const Header = styled.View`
+  padding: 24px;
+  background: #28262e;
 
-export const BackToSignIn = styled.TouchableOpacity`
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: #312e38;
-  border-top-width: 1px;
-  border-top-color: #232129;
-  padding: 16px 0;
-
-  align-items: center;
-  justify-content: center;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
-export const BackToSignInText = styled.Text`
-  color: #fff;
-  font-size: 18px;
-  font-family: 'RobotoSlab-Regular';
+
+export const BackButton = styled.TouchableOpacity``;
+
+export const HeaderTitle = styled.Text`
+  color: #f4ede8;
+  font-size: 20px;
+  font-family: 'RobotoSlab-Medium';
   margin-left: 16px;
+`;
+
+export const UserAvatar = styled.Image`
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  margin-left: auto;
+`;
+
+export const ProvidersListContainer = styled.View`
+  height: 112px;
+`;
+
+export const ProvidersList = styled(FlatList as new () => FlatList<Provider>)`
+  padding: 32px 24px;
+`;
+
+export const ProviderContainer = styled(RectButton)<ProviderContainerProps>`
+  background: ${(props) => (props.selected ? '#ff9000' : '#3e3b47')};
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 12px;
+  margin-right: 16px;
+  border-radius: 10px;
+`;
+
+export const ProviderAvatar = styled.Image`
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+`;
+
+export const ProviderName = styled.Text<ProviderNameProps>`
+  font-family: 'RobotoSlab-Medium';
+  font-size: 16px;
+  color: ${(props) => (props.selected ? '#232129' : '#f4ede8')};
+  margin-left: 8px;
 `;
